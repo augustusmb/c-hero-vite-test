@@ -5,7 +5,7 @@ dotenv.config()
 const pgp = pgPromise({});
 
 const config = {
-    connectionString: process.env.REACT_APP_DATABASE_URL,
+    connectionString: import.meta.env.VITE_DATABASE_URL,
     max: 30,
     ssl: { rejectUnauthorized: false }
   }
