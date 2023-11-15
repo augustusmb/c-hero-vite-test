@@ -57,7 +57,7 @@ if (import.meta.env.REACT_APP_NODE_ENV === "production") {
 }
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+  res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
 app.listen(port, () => {
