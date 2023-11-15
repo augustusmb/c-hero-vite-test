@@ -3,7 +3,6 @@ import router from './routes.js'
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import path from 'path';
-import db from '../db/db.js'
 import express from 'express';
 dotenv.config()
 const __dirname = path.resolve();
@@ -33,6 +32,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, () => {
   console.log('listening on port: ', port)
 })
