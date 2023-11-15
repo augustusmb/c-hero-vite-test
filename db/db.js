@@ -4,8 +4,10 @@ dotenv.config()
 
 const pgp = pgPromise({});
 
+const databaseURL = import.meta.env.VITE_DATABASE_URL
+
 const config = {
-    connectionString: import.meta.env.VITE_DATABASE_URL,
+    connectionString: databaseURL,
     max: 30,
     ssl: { rejectUnauthorized: false }
   }
