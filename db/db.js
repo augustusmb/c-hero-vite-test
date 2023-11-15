@@ -1,13 +1,17 @@
 import dotenv from 'dotenv'
 import pgPromise from 'pg-promise';
+import { defineConfig, loadEnv } from 'vite';
 dotenv.config()
 
-const pgp = pgPromise({});
-
-const databaseURL = import.meta.env.VITE_DATABASE_URL
+const env = loadEnv(
+  'all',
+  process.cwd()
+);
+  
+  const pgp = pgPromise({});
 
 const config = {
-    connectionString: databaseURL,
+    connectionString: env.VITE_DATABASE_URL,
     max: 30,
     ssl: { rejectUnauthorized: false }
   }

@@ -8,12 +8,23 @@ import express from 'express';
 dotenv.config()
 const __dirname = path.resolve();
 
+
+import { defineConfig, loadEnv } from 'vite';
+
+const env = loadEnv(
+  'all',
+  process.cwd()
+);
+
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors({ origin: 'http://localhost:3000' }));
-const port = import.meta.env.PORT || 8080
+app.use(cors({ origin: 'http://localhost:5173' }));
+const port = env.PORT || 8080
+
+
+
 
 /**  This is an example basic db query  **/
 // db.query('SELECT * FROM users')
@@ -27,7 +38,7 @@ const port = import.meta.env.PORT || 8080
 //   res.send('Hello World!')
 // })
 
-// if (import.meta.env.REACT_APP_NODE_ENV === "production") {
+// if (import.meta.env.VITE_NODE_ENV === "production") {
 //   app.use(express.static("dist"));
 // } else {
 //   app.use(express.static(path.join(__dirname, 'public')));
@@ -52,11 +63,13 @@ app.get('/test', (req, res) => {
 //   res.send('Good Job')
 // })
 
-if (import.meta.env.REACT_APP_NODE_ENV === "production") {
+if (env.VITE_NODE_ENV === "production") {
   app.use(express.static("build"));
 }
 
 app.get('/', (req, res) => {
+  console.log("Hello")
+
   res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
 

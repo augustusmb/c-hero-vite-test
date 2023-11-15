@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-const dbconfig = import.meta.env.REACT_APP_DB_LOCAL;
+const dbconfig = import.meta.env.VITE_DB_LOCAL;
 import pgPromise from 'pg-promise';
 const pgp = pgPromise({});
 

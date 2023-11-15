@@ -2,8 +2,16 @@ import dotenv from 'dotenv'
 import twilio from 'twilio' 
 dotenv.config()
 
-const accountSid = import.meta.env.REACT_APP_TWILIO_ACCOUNT_SID;
-const authToken = import.meta.env.REACT_APP_TWILIO_AUTH_TOKEN;
+import { defineConfig, loadEnv } from 'vite';
+dotenv.config()
+
+const env = loadEnv(
+  'all',
+  process.cwd()
+);
+
+const accountSid = env.VITE_TWILIO_ACCOUNT_SID;
+const authToken = env.VITE_TWILIO_AUTH_TOKEN;
 const client = twilio(accountSid, authToken);
 
 // client.messages
