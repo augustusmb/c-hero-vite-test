@@ -27,7 +27,7 @@ if (env.VITE_NODE_ENV === "production") {
   app.use(express.static("public"));
 }
 
-app.get('/api/', (req, res) => {
+app.get('/', (req, res) => {
   console.log("Hello")
   res.sendFile(path.join(__dirname, "../dist/index.html"));
 });
