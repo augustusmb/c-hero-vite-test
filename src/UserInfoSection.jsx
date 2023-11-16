@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 
 import axios from "axios";
+import { PropTypes } from "prop-types";
 
 const UserInfoSection = (props) => {
   let [editMode, setEditMode] = useState(false);
@@ -11,16 +12,17 @@ const UserInfoSection = (props) => {
   const formRef = useRef(null);
 
   function triggerEditMode() {
+    console.log("Edit mode triggered");
     setEditMode(!editMode);
     axios
       .get("/routes/companies")
       .then((res) => {
         setCompanies(res.data);
-        return axios.get("/routes/vessels");
+        return axios.get("/api/routes/vessels");
       })
       .then((res) => {
         setVessels(res.data);
-        return axios.get("/routes/ports");
+        return axios.get("/api/routes/ports");
       })
       .then((res) => {
         setPorts(res.data);
@@ -48,7 +50,7 @@ const UserInfoSection = (props) => {
       port,
     };
 
-    axios.put("/routes/users", { params: updatedUserInfo }).then(() => {});
+    axios.put("/api/routes/users", { params: updatedUserInfo }).then(() => {});
     setEditMode(false);
     toggleEditMode(2);
   };
@@ -56,7 +58,7 @@ const UserInfoSection = (props) => {
   return (
     <div>
       {!editMode ? (
-        <div>
+        <div className="grid grid-cols-2">
           <div htmlFor="Name">Name:</div>
           <div>{userInfo.name}</div>
           <div htmlFor="Email">Email:</div>
@@ -100,6 +102,19 @@ const UserInfoSection = (props) => {
       )}
     </div>
   );
+};
+
+UserInfoSection.propTypes = {
+  userInfo: PropTypes.shape({
+    name: PropTypes.string,
+    email: PropTypes.string,
+    title_function: PropTypes.string,
+    company: PropTypes.string,
+    vessel: PropTypes.string,
+    port: PropTypes.string,
+    id: PropTypes.string,
+  }),
+  toggleEditMode: PropTypes.func,
 };
 
 export default UserInfoSection;

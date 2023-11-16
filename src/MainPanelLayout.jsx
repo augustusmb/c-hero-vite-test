@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 // import SideNavigation from "./SideNavigation.jsx";
 import HeaderNavigationBar from "./HeaderNavigation.jsx";
 import MainPanelRouter from "./MainPanelRouter.jsx";
-// import axios from "axios";
+import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export const UserAuthContext = React.createContext();
@@ -14,6 +14,12 @@ const MainPanelLayout = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   const { user } = useAuth0();
 
+  console.log("User here: ", user);
+
+  // const user = {
+  //   name: "+16503808229",
+  // };
+
   const userInfoContext = {
     userInfo,
     toggleEditMode: (val) => {
@@ -21,20 +27,21 @@ const MainPanelLayout = () => {
     },
   };
 
-  // useEffect(() => {
-  //   setEditMode(1);
-  //   user &&
-  //     axios
-  //       .get("/routes/users", {
-  //         params: { phone: user.name },
-  //       })
-  //       .then((res) => {
-  //         setUserInfo(res.data[0]);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  // }, [user, editMode]);
+  useEffect(() => {
+    setEditMode(1);
+    user &&
+      axios
+        .get("/api/routes/users", {
+          params: { phone: user.name },
+        })
+        .then((res) => {
+          setUserInfo(res.data[0]);
+          console.log("User Info Set", res.data[0]);
+        })
+        .catch((err) => {
+          console.log("Error here retrieving user info: ", err);
+        });
+  }, [user, editMode]);
 
   const toggleSidebar = () => {
     setShowSidebar(!showSidebar);

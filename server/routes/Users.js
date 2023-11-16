@@ -46,10 +46,9 @@ export function getUserByPhone(req, res) {
 
 export function deleteUser(req, res) {
   const { phone } = req.query
-  console.log('Server Hit Here: ', phone)
   db.query(queries.deleteUser, { phone })
   .then(data => {
-    res.status(200)
+    res.send(data)
   })
   .catch(err => console.log('Error requesting account info: ', err))
 }

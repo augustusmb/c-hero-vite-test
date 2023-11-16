@@ -12,7 +12,7 @@ const DeleteUserSection = () => {
   const { handleSubmit, register, reset } = useForm();
 
   const retrieveUser = async (data) => {
-    const fetchedUser = await axios.get("/routes/users", {
+    const fetchedUser = await axios.get("/api/routes/users", {
       params: { phone: data["Phone Number"] },
     });
     setUserFound(!!fetchedUser.data[0]);
@@ -59,7 +59,7 @@ const DeleteUserSection = () => {
   };
 
   const deleteUser = () => {
-    axios.delete("/routes/users", {
+    axios.delete("/api/routes/users", {
       params: { phone: fetchedUserData.phone },
     });
 

@@ -9,10 +9,12 @@ const UserAccountPage = () => {
   const { userInfo, toggleEditMode } = useContext(UserAuthContext);
   const { user, isLoading } = useAuth0();
 
+  console.log("User info here: ", userInfo);
+
   useEffect(() => {
     user &&
       axios
-        .get("/routes/classes", { params: { id: userInfo.id } })
+        .get("/api/routes/classes", { params: { id: userInfo.id } })
         .then((res) => {
           setUsersClasses(res.data);
         })
