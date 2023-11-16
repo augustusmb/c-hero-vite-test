@@ -29,7 +29,7 @@ if (env.VITE_NODE_ENV === "production") {
 
 app.get('/', (req, res) => {
   console.log("Hello")
-  res.sendFile(path.join(__dirname, "../dist/index.html"));
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"));
 });
 
 app.listen(port, () => {
