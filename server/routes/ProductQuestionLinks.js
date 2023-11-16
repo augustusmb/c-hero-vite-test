@@ -1,6 +1,6 @@
 import db from '../../db/db.js';
 import path from 'path';
-import pLimit from 'p-limit';
+// import pLimit from 'p-limit';
 
 import dotenv from 'dotenv';
 
@@ -33,7 +33,7 @@ const queries = {
   addProductQuestionLinks: sql('addProductQuestionLink.sql'),
 };
 
-const limit = pLimit(10)
+// const limit = pLimit(10)
 
 export const addProductQuestionLinks = (items) => {
   items.forEach(item => {
@@ -44,11 +44,11 @@ export const addProductQuestionLinks = (items) => {
   })
 }
 
-const addQuestionPLimit = async () => {
-  let promises = productQuestions.map(([question_id, product_id]) => limit(() => db.none(queries.addProductQuestionLinks, { question_id, product_id })))
+// const addQuestionPLimit = async () => {
+//   let promises = productQuestions.map(([question_id, product_id]) => limit(() => db.none(queries.addProductQuestionLinks, { question_id, product_id })))
   
-  let insertedQuestionPromises = await Promise.all(promises)
+//   let insertedQuestionPromises = await Promise.all(promises)
 
-}
+// }
 
-addQuestionPLimit()
+// addQuestionPLimit()
