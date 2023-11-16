@@ -25,22 +25,22 @@ const sql = (file) => {
   return new QueryFile(fullPath, { minify: true });
 };
 
-const queries = {
-  getAllUserData: sql("getAllUserData.sql"),
-};
+// const queries = {
+//   getAllUserData: sql("getAllUserData.sql"),
+// };
 
-async function getUserTestData(user) {
-  let userTestData = await db.any(
-    `select * from users_products where user_id = ${user.id}`
-  );
-  user.totalTests = userTestData.length;
-  user.testsCompleted = userTestData.reduce((acc, test) => {
-    let numToAdd = test.completed ? 1 : 0;
-    return acc + numToAdd;
-  }, 0);
+// async function getUserTestData(user) {
+//   let userTestData = await db.any(
+//     `select * from users_products where user_id = ${user.id}`
+//   );
+//   user.totalTests = userTestData.length;
+//   user.testsCompleted = userTestData.reduce((acc, test) => {
+//     let numToAdd = test.completed ? 1 : 0;
+//     return acc + numToAdd;
+//   }, 0);
 
-  return user;
-}
+//   return user;
+// }
 
 // export async function getAllUserData(req, res) {
 
